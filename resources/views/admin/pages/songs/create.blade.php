@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-md-12 mb-3">
             <h3>New Song</h3>
+            <hr>
         </div>
     </div>
 

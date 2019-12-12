@@ -32,8 +32,6 @@ class SongController extends Controller
             $query->orderBy('order');
         }]);
 
-        dd($song->toArray());
-
         return view('front.pages.songs.show', compact('song'));
     }
 }

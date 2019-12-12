@@ -1,4 +1,4 @@
-<main class="admin-main container py-5">
+<main class="admin-main container-fluid py-5">
     @if(session()->has('status'))
         <div class="row">
             <div class="col-md-12 mb-3">

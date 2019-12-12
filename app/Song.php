@@ -47,4 +47,24 @@ class Song extends Model
     {
         return $this->hasMany(Track::class);
     }
+
+    /**
+     * Get the song image full url.
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute(): string
+    {
+        return Storage::url($this->image);
+    }
+
+    /**
+     * Get the song video full url.
+     *
+     * @return string
+     */
+    public function getVideoUrlAttribute(): string
+    {
+        return Storage::url($this->video);
+    }
 }

@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-md-12 mb-3">
             <h3>Songs</h3>
+            <hr>
             <p>
                 <a class="btn btn-primary"
                    href="{{ route('admin.songs.create') }}">

@@ -19,6 +19,7 @@ class CreateTracksTable extends Migration
             $table->string('audio');
             $table->string('image');
             $table->unsignedInteger('order');
+            $table->unsignedBigInteger('duration')->nullable();
             $table->timestamps();
 
             $table->foreign('song_id')->references('id')->on('songs')->onDelete('cascade');

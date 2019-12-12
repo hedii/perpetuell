@@ -36,4 +36,24 @@ class Track extends Model
     {
         return $this->belongsTo(Song::class);
     }
+
+    /**
+     * Get the track audio full url.
+     *
+     * @return string
+     */
+    public function getAudioUrlAttribute(): string
+    {
+        return Storage::url($this->audio);
+    }
+
+    /**
+     * Get the track image full url.
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute(): string
+    {
+        return Storage::url($this->image);
+    }
 }
