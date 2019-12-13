@@ -22,3 +22,4 @@ mix
 
   // general
   .copyDirectory('resources/images', 'public/images')
+  .version()

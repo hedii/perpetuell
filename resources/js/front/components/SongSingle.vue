@@ -1,39 +1,61 @@
 <template>
-  <div ref="songel">
-    <video ref="fullscreenvideo"
-           class="fullscreen-video"
-           autoplay muted>
-      <source :src="videoUrl"
-              type="video/mp4">
-    </video>
+  <div>
+    <template v-if="isLoading">
+      <div class="loader-wrap"
+           :style="loaderWrapStyle">
+        <p v-if="error">
+          An error has occurred during tracks preload, please <a :href="baseUrl">go back to home</a>
+        </p>
+        <PulseLoader v-else
+                     :loading="isLoading"
+                     color="black"/>
+      </div>
+    </template>
+    <template v-else>
+      <video ref="fullscreenvideo"
+             class="fullscreen-video"
+             autoplay muted loop>
+        <source :src="videoUrl"
+                type="video/mp4">
+      </video>
 
-    <div v-if="song"
-         class="page-content">
-      <div class="tracks"
-           :style="tracksStyle">
-        <div v-for="track in song.tracks"
-             :key="track.id"
-             class="track">
-          <img :src="`/${track.image}`"
-               alt=""
-               :style="trackStyle">
+      <BackToHome :base-url="baseUrl"/>
+
+      <div v-if="song"
+           class="page-content">
+        <div class="tracks"
+             :style="tracksStyle">
+          <TrackComponent v-for="track in song.tracks"
+                          :key="track.id"
+                          :track="track"
+                          :window-height="windowHeight"
+                          :base-url="baseUrl"/>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
-import { Howl, Howler } from 'howler'
+import BackToHome from './BackToHome'
+import TrackComponent from './TrackComponent'
+import PulseLoader from 'vue-spinner/src/PulseLoader'
+import axios from 'axios'
 
 export default {
+  components: {
+    BackToHome,
+    TrackComponent,
+    PulseLoader
+  },
   data () {
     return {
       windowHeight: 0,
-      baseUrl: null,
+      baseUrl: '/',
       song: {},
-      sound: null,
-      tracks: []
+      isLoading: true,
+      loadedCount: 0,
+      error: false
     }
   },
   computed: {
@@ -41,64 +63,49 @@ export default {
       return this.song.hasOwnProperty('video') ? `/${this.song.video}` : null
     },
     tracksStyle () {
-      console.log(this.windowHeight)
-
       return {
-        width: 'auto',
         height: `${this.windowHeight}px`
       }
     },
-    trackStyle () {
+    loaderWrapStyle () {
       return {
-        width: 'auto',
-        height: `${this.windowHeight / 9}px`
+        height: `${this.windowHeight}px`
       }
     }
   },
   methods: {
     initialize () {
-      // this.baseUrl = window.baseUrl
-      // this.song = window.song
-      // let tracks = []
-      //
-      // this.song.tracks.forEach(track => {
-      //   tracks.push(`${this.baseUrl}/${track.audio}`)
-      // })
-      //
-      // console.log(tracks)
-      //
-      // this.sound = new Howl({
-      //   src: tracks
-      // })
-
-      // const id1 = this.sound.play()
-      // const id2 = this.sound.play()
-
-      // this.sound.play()
-
       this.windowHeight = window.innerHeight
       this.baseUrl = window.baseUrl
       this.song = window.song
-      let tracks = []
-
-      this.song.tracks.forEach(track => {
-        tracks.push(new Howl({ src: `${this.baseUrl}/${track.audio}` }))
+    },
+    preloadFiles () {
+      // preload song video
+      axios.get(`${this.baseUrl}/${song.video}`).then(() => {
+        this.loadedCount = this.loadedCount + 1
+        if (this.loadedCount === this.song.tracks.length) {
+          this.isLoading = false
+        }
+      }).catch(() => {
+        this.error = true
       })
 
-      this.tracks = tracks
-
-      this.tracks.forEach(track => {
-        track.on('end', trackId => {
-
+      // preload tracks audio
+      this.song.tracks.forEach(track => {
+        axios.get(`${this.baseUrl}/${track.audio}`).then(() => {
+          this.loadedCount = this.loadedCount + 1
+          if (this.loadedCount === this.song.tracks.length) {
+            this.isLoading = false
+          }
+        }).catch(() => {
+          this.error = true
         })
-        track.play()
-        const duration = track.duration()
-        console.log(duration)
       })
     }
   },
   mounted () {
     this.initialize()
+    this.preloadFiles()
 
     window.addEventListener('resize', event => {
       this.windowHeight = window.innerHeight
@@ -134,13 +141,15 @@ export default {
 
   .tracks {
     position: absolute;
-    top: 5px;
+    top: 15px;
     right: 30px;
+    width: auto;
   }
 
-  .track img {
-    display: block;
-    height: 10%;
-    width: auto;
+  .loader-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 </style>
