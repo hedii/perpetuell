@@ -76,7 +76,7 @@
 
                             <div class="col-md-6">
                                 <video controls style="width: 100%;" class="mb-3">
-                                    <source src="{{ $song->video_url }}" type="video/ogg">
+                                    <source src="{{ $song->video_url }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                                 <div class="form-group">

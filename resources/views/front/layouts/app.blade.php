@@ -11,5 +11,6 @@
 @includeWhen(Route::is('front.songs.index'), 'front.partials.header')
 @yield('content')
 <script src="{{ asset('js/front/app.js') }}"></script>
+@stack('scripts')
 </body>
 </html>

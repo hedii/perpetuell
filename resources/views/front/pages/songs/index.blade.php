@@ -2,14 +2,16 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            @foreach($songs as $song)
-                <div class="col-md-6 col-md-offset-3">
+        @foreach($songs as $song)
+            <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
                     <a href="{{ route('front.songs.show', $song) }}">
-                        <img src="{{ $song->image }}" alt="{{ $song->name }}" style="width: 100%">
+                        <img src="{{ $song->image_url }}"
+                             alt="{{ $song->name }}"
+                             class="img-fluid">
                     </a>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
 @endsection

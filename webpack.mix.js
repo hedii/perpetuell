@@ -19,3 +19,6 @@ mix
   // admin
   .js('resources/js/admin/app.js', 'public/js/admin/app.js')
   .sass('resources/sass/admin/app.scss', 'public/css/admin/app.css')
+
+  // general
+  .copyDirectory('resources/images', 'public/images')
