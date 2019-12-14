@@ -1,0 +1,15 @@
+---
+- name: Upgrade apt
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Upgrade apt
+      apt:
+        upgrade: dist
+        dpkg_options: 'force-confdef,force-confold'
+        update_cache: yes
+
+    - name: Run apt autoremove
+      apt:
+        autoremove: yes
