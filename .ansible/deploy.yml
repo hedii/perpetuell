@@ -1,0 +1,14 @@
+---
+- name: Deploy application
+  hosts: all
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars/app.yml
+    - vars/deploy.yml
+    - vars/mysql.yml
+    - vars/mysql-secret.yml
+    - vars/nginx.yml
+    - vars/php.yml
+  roles:
+    - ansistrano.deploy

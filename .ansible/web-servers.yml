@@ -1,0 +1,10 @@
+---
+- name: Ensure web server is running
+  hosts: all
+  become: yes
+  vars_files:
+    - vars/nginx.yml
+    - vars/php.yml
+  roles:
+    - hedii.php
+    - hedii.nginx

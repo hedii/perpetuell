@@ -1,0 +1,37 @@
+---
+- name: Base tasks
+  hosts: all
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars/base.yml
+  tasks:
+    - name: Ensure locale is set correctly
+      locale_gen:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - en_US.UTF-8
+        - fr_FR.UTF-8
+
+    - name: Enable debian backports
+      apt_repository:
+        repo: deb http://debian.mirrors.ovh.net/debian {{ ansible_distribution_release }}-backports main contrib non-free
+        filename: "{{ ansible_distribution_release }}-backports"
+        state: present
+        update_cache: yes
+
+    - name: Add php apt repo key
+      apt_key:
+        url: https://packages.sury.org/php/apt.gpg
+        state: present
+
+    - name: Add php apt repository
+      apt_repository:
+        repo: deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main
+        state: present
+
+    - name: Ensure base packages are installed
+      apt:
+        name: "{{ base_apt_packages }}"
+        state: present

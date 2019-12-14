@@ -1,0 +1,23 @@
+---
+mysql_debian_distribution: "{{ ansible_distribution_release }}"
+mysql_repo_identifier_key: "0xF1656F24C74CD1D8"
+mysql_mariadb_version: "10.4"
+mysql_bind_address: 127.0.0.1
+mysql_packages:
+  - mariadb-client
+  - mariadb-server
+  - python-mysqldb
+mysql_root_password_update: yes
+mysql_root_password: "{{ mysql_secret_root_password }}"
+mysql_log_error: /var/log/mysqld.log
+mysql_databases:
+  - name: "{{ mysql_secret_db_name }}"
+    encoding: utf8mb4
+    collation: utf8mb4_general_ci
+mysql_users:
+  - name: "{{ mysql_secret_db_user }}"
+    host: 127.0.0.1
+    password: "{{ mysql_secret_db_user_password }}"
+    priv: "{{ mysql_secret_db_name }}.*:ALL"
+mysql_skip_name_resolve: yes
+mysql_datadir: /home/mysql

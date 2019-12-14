@@ -1,0 +1,13 @@
+---
+ansistrano_deploy_to: "{{ nginx_base_web_directory }}/perpetuell"
+ansistrano_after_update_code_tasks_file: "{{ playbook_dir }}/deploy/tasks/after-update-code.yml"
+ansistrano_before_symlink_shared_tasks_file: "{{ playbook_dir }}/deploy/tasks/before-symlink-shared.yml"
+ansistrano_after_symlink_tasks_file: "{{ playbook_dir }}/deploy/tasks/after-symlink.yml"
+ansistrano_keep_releases: 2
+ansistrano_deploy_via: git
+ansistrano_git_repo: https://github.com/hedii/perpetuell
+ansistrano_allow_anonymous_stats: no
+ansistrano_shared_files:
+  - .env
+ansistrano_shared_paths:
+  - storage

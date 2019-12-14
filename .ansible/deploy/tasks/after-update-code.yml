@@ -1,0 +1,47 @@
+---
+- name: Check if shared storage exists
+  stat:
+    path: "{{ ansistrano_shared_path }}/storage"
+  register: storage_dir
+
+- name: Copy storage directory
+  copy:
+    src: "{{ ansistrano_release_path.stdout }}/storage"
+    dest: "{{ ansistrano_shared_path }}/storage"
+    remote_src: yes
+    owner: www-data
+    group: www-data
+    mode: "0777"
+  when: storage_dir.stat.exists == False
+
+- name: Make sure storage folder has required folders inside of it
+  file:
+    path: "{{ ansistrano_shared_path }}/{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0777"
+  with_items:
+    - storage/app/public
+    - storage/logs
+    - storage/framework/views
+    - storage/framework/sessions
+    - storage/framework/cache
+
+- name: Install composer dependencies
+  composer:
+    command: install
+    optimize_autoloader: yes
+    no_dev: yes
+    working_dir: "{{ ansistrano_release_path.stdout }}"
+
+- name: Ensure cron task is added
+  cron:
+    name: Perpetuelles cron job
+    job: /usr/bin/php {{ ansistrano_deploy_to }}/current/artisan schedule:run >> /dev/null 2>&1
+    state: present
+
+- name: Setup vhost
+  template:
+    src: "{{ playbook_dir }}/deploy/templates/vhost.conf.j2"
+    dest: "/etc/nginx/sites-enabled/perpetuell.conf"

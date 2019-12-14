@@ -1,0 +1,35 @@
+---
+- name: Set permissions
+  file:
+    path: "{{ ansistrano_deploy_to }}"
+    owner: www-data
+    group: www-data
+    recurse: yes
+    state: directory
+
+- name: Link storage
+  file:
+    src: "{{ ansistrano_release_path.stdout }}/storage/app/public"
+    dest: "{{ ansistrano_release_path.stdout }}/public/storage"
+    state: link
+
+- name: Optimize laravel
+  shell: php artisan clear-compiled && php artisan config:cache && php artisan route:cache
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+
+- name: Migrate the database
+  shell: php artisan migrate --force
+  args:
+    chdir: "{{ ansistrano_release_path.stdout }}"
+  ignore_errors: yes
+
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+- name: Reload php
+  service:
+    name: "php{{ php_version }}-fpm"
+    state: reloaded

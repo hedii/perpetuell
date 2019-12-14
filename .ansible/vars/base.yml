@@ -1,0 +1,20 @@
+---
+base_apt_packages:
+  - sudo
+  - dirmngr
+  - software-properties-common
+  - apt-transport-https
+  - lsb-release
+  - ca-certificates
+  - htop
+  - fail2ban
+  - git
+  - curl
+  - vim
+  - zip
+  - unzip
+  - jpegoptim
+  - optipng
+  - pngquant
+  - ffmpeg
+  - ncdu

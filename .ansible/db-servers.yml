@@ -1,0 +1,11 @@
+---
+- name: Ensure db server is running
+  hosts: all
+  become: yes
+  vars_files:
+    - vars/mysql.yml
+    - vars/mysql-secret.yml
+    - vars/redis.yml
+  roles:
+    - DavidWittman.redis
+    - hedii.mysql

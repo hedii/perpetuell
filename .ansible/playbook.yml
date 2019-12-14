@@ -1,0 +1,5 @@
+---
+- import_playbook: base.yml
+- import_playbook: web-servers.yml
+- import_playbook: db-servers.yml
+- import_playbook: deploy.yml
