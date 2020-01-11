@@ -1,5 +1,6 @@
 .modal-backdrop.show {
-  opacity: .1;
+  opacity: .9;
+  background: #fff;
 }
 
 .modal-header {
@@ -8,7 +9,7 @@
 
 .modal-content {
   border-radius: 0;
-  border: 1px solid #000;
+  border: none;
 }
 
 .modal-header .close {
