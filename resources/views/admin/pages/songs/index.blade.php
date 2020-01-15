@@ -41,7 +41,8 @@
                                         Edit
                                     </a>
                                     <a class="btn btn-sm btn-outline-success"
-                                       href="">
+                                       href="{{ route('front.songs.show', $song) }}"
+                                       target="_blank">
                                         Show
                                     </a>
                                     <button type="button"
