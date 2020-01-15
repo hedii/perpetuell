@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Song;
+use Illuminate\View\View;
 
 class SongController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $songs = Song::with(['tracks' => function ($query) {
             $query->orderBy('order');
@@ -24,9 +25,9 @@ class SongController extends Controller
      * Display the specified resource.
      *
      * @param \App\Song $song
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show(Song $song)
+    public function show(Song $song): View
     {
         $song->load(['tracks' => function ($query) {
             $query->orderBy('order');
