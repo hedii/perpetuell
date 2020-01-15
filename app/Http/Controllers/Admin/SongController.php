@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Audio\AudioDuration;
+use App\Jobs\ConvertAudio;
+use App\Jobs\ConvertVideo;
 use App\Song;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -67,14 +68,17 @@ class SongController extends Controller
         ]);
 
         for ($i = 1; $i <= 8; $i++) {
+            /** @var \App\Track $track */
             $track = $song->tracks()->create([
                 'audio' => $request->file("track_audio_{$i}")->storeAs('audio', Str::random(40) . '.mp3', 'public'),
                 'image' => $request->file("track_image_{$i}")->store('images', 'public'),
                 'order' => $i,
             ]);
 
-            $track->update(['duration' => AudioDuration::get(storage_path("app/public/{$track->audio}"))]);
+            $this->dispatch(new ConvertAudio($track));
         }
+
+        $this->dispatch(new ConvertVideo($song));
 
         return redirect(route('admin.songs.edit', $song))
             ->with('status', "Song #{$song->id} ({$song->name}) created");
