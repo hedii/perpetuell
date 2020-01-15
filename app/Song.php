@@ -23,7 +23,9 @@ class Song extends Model
     {
         parent::boot();
 
-        static::deleted(function (Song $song) {
+        static::deleting(function (Song $song) {
+            Storage::disk('public')->delete($song->tracks->pluck('audio')->toArray());
+            Storage::disk('public')->delete($song->tracks->pluck('image')->toArray());
             Storage::disk('public')->delete([$song->image, $song->video]);
         });
     }

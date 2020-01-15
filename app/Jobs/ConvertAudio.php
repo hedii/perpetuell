@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Pbmedia\LaravelFFMpeg\FFMpeg;
 
@@ -52,6 +53,8 @@ class ConvertAudio implements ShouldQueue
                 (new Mp3())->setAudioKiloBitrate(128)
             )
             ->save($convertedAudioPath);
+
+        Storage::disk('public')->delete($this->track->audio);
 
         $this->track->update([
             'audio' => $convertedAudioPath,

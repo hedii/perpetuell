@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Pbmedia\LaravelFFMpeg\FFMpeg;
 
@@ -52,6 +53,8 @@ class ConvertVideo implements ShouldQueue
                 (new X264('libmp3lame', 'libx264'))->setKiloBitrate(500)
             )
             ->save($convertedVideoPath);
+
+        Storage::disk('public')->delete($this->song->video);
 
         $this->song->update(['video' => $convertedVideoPath]);
     }

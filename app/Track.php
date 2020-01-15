@@ -16,18 +16,6 @@ class Track extends Model
     protected $guarded = [];
 
     /**
-     * The "booting" method of the model.
-     */
-    public static function boot()
-    {
-        parent::boot();
-
-        static::deleted(function (Track $track) {
-            Storage::disk('public')->delete([$track->audio, $track->image]);
-        });
-    }
-
-    /**
      * Get the song that owns the track.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
