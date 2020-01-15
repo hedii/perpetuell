@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Jobs\ConvertAudio;
 use App\Jobs\ConvertVideo;
+use App\Jobs\OptimizeSongImage;
+use App\Jobs\OptimizeTrackImage;
 use App\Song;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -75,9 +77,11 @@ class SongController extends Controller
                 'order' => $i,
             ]);
 
+            $this->dispatch(new OptimizeTrackImage($track));
             $this->dispatch(new ConvertAudio($track));
         }
 
+        $this->dispatch(new OptimizeSongImage($song));
         $this->dispatch(new ConvertVideo($song));
 
         return redirect(route('admin.songs.edit', $song))
