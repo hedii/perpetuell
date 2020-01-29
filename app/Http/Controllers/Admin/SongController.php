@@ -65,7 +65,7 @@ class SongController extends Controller
             'name' => $request->input('name'),
             'image' => $request->file('image')->store('images', 'local'),
             'video' => $request->file('video')->store('videos', 'local'),
-            'is_published' => $request->input('is_published') ? true : false,
+            'is_published' => false,
         ]);
 
         for ($i = 1; $i <= 8; $i++) {
@@ -82,6 +82,12 @@ class SongController extends Controller
 
         $this->dispatch(new OptimizeSongImage($song));
         $this->dispatch(new ConvertVideo($song));
+
+        // we can publish the song publication, now that all files are
+        // converted
+        $song->update([
+            'is_published' => $request->input('is_published') ? true : false
+        ]);
 
         return redirect(route('admin.songs.edit', $song))
             ->with('status', "Song #{$song->id} ({$song->name}) created");
