@@ -84,7 +84,7 @@ class SongController extends Controller
         $this->dispatch(new ConvertVideo($song));
 
         // we can publish the song publication, now that all files are
-        // converted
+        // converted and optimized
         $song->update([
             'is_published' => $request->input('is_published') ? true : false
         ]);
