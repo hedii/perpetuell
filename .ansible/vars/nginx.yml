@@ -6,6 +6,7 @@ nginx_os_name: "{{ ansible_distribution_release }}"
 nginx_server_tokens: "on"
 nginx_remove_default_vhost: true
 nginx_multi_accept: "on"
+nginx_client_max_body_size: 1G
 nginx_extra_http_options: |
   fastcgi_read_timeout 300;
   proxy_read_timeout 300;
