@@ -12,6 +12,6 @@
 
 @push('preload')
     @foreach($song->tracks as $track)
-        <link rel="preload" href="{{ config('app.url') . '/' . $track->image }}" as="image">
+        <link rel="preload" href="{{ Storage::url($track->image) }}" as="image">
     @endforeach
 @endpush

@@ -12,6 +12,9 @@
 <body>
 @includeWhen(Route::is('front.songs.index'), 'front.partials.header')
 @yield('content')
+<script>
+window.containerUrl = '{{ config('filesystems.disks.s3.url') }}'
+</script>
 <script src="{{ mix('js/front/app.js') }}"></script>
 @stack('scripts')
 </body>

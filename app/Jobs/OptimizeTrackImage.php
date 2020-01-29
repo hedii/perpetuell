@@ -38,14 +38,25 @@ class OptimizeTrackImage implements ShouldQueue
      * Execute the job.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileExistsException
      */
     public function handle(): void
     {
         try {
-            Image::load(Storage::disk('public')->path($this->track->image))
+            Image::load(Storage::disk('local')->path($this->track->image))
                 ->fit(Manipulations::FIT_CONTAIN, 1680, 9999)
                 ->optimize()
                 ->save();
+
+            // copy image from local disk to cloud disk
+            Storage::disk('s3')->writeStream(
+                $this->track->image,
+                Storage::disk('local')->readStream($this->track->image)
+            );
+
+            // delete image from local disk
+            Storage::disk('local')->delete($this->track->image);
         } catch (InvalidManipulation $exception) {
             unset($exception);
         }

@@ -63,16 +63,16 @@ class SongController extends Controller
         /** @var \App\Song $song */
         $song = $request->user()->songs()->create([
             'name' => $request->input('name'),
-            'image' => $request->file('image')->store('images', 'public'),
-            'video' => $request->file('video')->store('videos', 'public'),
+            'image' => $request->file('image')->store('images', 'local'),
+            'video' => $request->file('video')->store('videos', 'local'),
             'is_published' => $request->input('is_published') ? true : false,
         ]);
 
         for ($i = 1; $i <= 8; $i++) {
             /** @var \App\Track $track */
             $track = $song->tracks()->create([
-                'audio' => $request->file("track_audio_{$i}")->storeAs('audio', Str::random(40) . '.mp3', 'public'),
-                'image' => $request->file("track_image_{$i}")->store('images', 'public'),
+                'audio' => $request->file("track_audio_{$i}")->storeAs('audio', Str::random(40) . '.mp3', 'local'),
+                'image' => $request->file("track_image_{$i}")->store('images', 'local'),
                 'order' => $i,
             ]);
 

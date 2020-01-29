@@ -39,23 +39,36 @@ class ConvertVideo implements ShouldQueue
      *
      * @param \Pbmedia\LaravelFFMpeg\FFMpeg $ffmpeg
      * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileExistsException
      */
     public function handle(FFMpeg $ffmpeg): void
     {
         $convertedVideoPath = 'converted/' . Str::before($this->song->video, '.') . '.mp4';
 
         $ffmpeg
-            ->fromDisk('public')
+            ->fromDisk('local')
             ->open($this->song->video)
             ->export()
-            ->toDisk('public')
+            ->toDisk('local')
             ->inFormat(
                 (new X264('libmp3lame', 'libx264'))->setKiloBitrate(500)
             )
             ->save($convertedVideoPath);
 
-        Storage::disk('public')->delete($this->song->video);
+        // delete raw video file from local disk
+        Storage::disk('local')->delete($this->song->video);
 
+        // update Song model
         $this->song->update(['video' => $convertedVideoPath]);
+
+        // copy converted video file from local disk to cloud disk
+        Storage::disk('s3')->writeStream(
+            $convertedVideoPath,
+            Storage::disk('local')->readStream($convertedVideoPath)
+        );
+
+        // delete converted video file from local disk
+        Storage::disk('local')->delete($convertedVideoPath);
     }
 }

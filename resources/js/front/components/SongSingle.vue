@@ -4,7 +4,7 @@
       <div class="loader-wrap"
            :style="loaderWrapStyle">
         <p v-if="error">
-          An error has occurred during tracks preload, please <a :href="baseUrl">go back to home</a>
+          An error has occurred during tracks preload, please <a :href="homeUrl">go back to home</a>
         </p>
         <PulseLoader v-else
                      :loading="isLoading"
@@ -19,7 +19,7 @@
                 type="video/mp4">
       </video>
 
-      <BackToHome :base-url="baseUrl"/>
+      <BackToHome/>
 
       <div v-if="song"
            class="page-content">
@@ -51,7 +51,8 @@ export default {
   data () {
     return {
       windowHeight: 0,
-      baseUrl: '/',
+      homeUrl: '/',
+      baseUrl: window.containerUrl,
       song: {},
       isLoading: true,
       loadedCount: 0,
@@ -60,7 +61,7 @@ export default {
   },
   computed: {
     videoUrl () {
-      return this.song.hasOwnProperty('video') ? `/${this.song.video}` : null
+      return this.song.hasOwnProperty('video') ? `${this.baseUrl}/${this.song.video}` : null
     },
     tracksStyle () {
       return {
@@ -76,7 +77,7 @@ export default {
   methods: {
     initialize () {
       this.windowHeight = window.innerHeight
-      this.baseUrl = window.baseUrl
+      this.baseUrl = window.containerUrl
       this.song = window.song
     },
     preloadFiles () {
@@ -86,7 +87,8 @@ export default {
         if (this.loadedCount === this.song.tracks.length) {
           this.isLoading = false
         }
-      }).catch(() => {
+      }).catch((error) => {
+        console.log(error)
         this.error = true
       })
 
@@ -97,7 +99,8 @@ export default {
           if (this.loadedCount === this.song.tracks.length) {
             this.isLoading = false
           }
-        }).catch(() => {
+        }).catch((error) => {
+          console.log(error)
           this.error = true
         })
       })

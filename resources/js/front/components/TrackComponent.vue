@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     imageUrl () {
-      return `/${this.track.image}`
+      return `${this.baseUrl}/${this.track.image}`
     },
     trackStyle () {
       return {

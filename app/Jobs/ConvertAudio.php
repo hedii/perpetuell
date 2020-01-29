@@ -39,26 +39,40 @@ class ConvertAudio implements ShouldQueue
      *
      * @param \Pbmedia\LaravelFFMpeg\FFMpeg $ffmpeg
      * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileExistsException
      */
     public function handle(FFMpeg $ffmpeg): void
     {
         $convertedAudioPath = 'converted/' . Str::before($this->track->audio, '.') . '.mp3';
 
         $media = $ffmpeg
-            ->fromDisk('public')
+            ->fromDisk('local')
             ->open($this->track->audio)
             ->export()
-            ->toDisk('public')
+            ->toDisk('local')
             ->inFormat(
-                (new Mp3())->setAudioKiloBitrate(128)
+                (new Mp3())->setAudioKiloBitrate(96)
+//                (new Mp3())->setAudioKiloBitrate(128)
             )
             ->save($convertedAudioPath);
 
-        Storage::disk('public')->delete($this->track->audio);
+        // delete raw audio file from local disk
+        Storage::disk('local')->delete($this->track->audio);
 
+        // update Track Model
         $this->track->update([
             'audio' => $convertedAudioPath,
             'duration' => $media->getDurationInSeconds()
         ]);
+
+        // copy converted audio file from local disk to cloud disk
+        Storage::disk('s3')->writeStream(
+            $convertedAudioPath,
+            Storage::disk('local')->readStream($convertedAudioPath)
+        );
+
+        // delete converted audio file from local disk
+        Storage::disk('local')->delete($convertedAudioPath);
     }
 }
