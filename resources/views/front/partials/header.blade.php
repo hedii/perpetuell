@@ -41,49 +41,36 @@
             </div>
             <div class="modal-body">
                 <div class="home-modal-text" id="home-modal-text-1">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, earum placeat. Aliquid impedit
-                        nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi neque perspiciatis quidem
-                        ratione, sapiente sed voluptatum.</p>
+                    <p>
+                        perpetuell.es est un site hébergeant des paysag.es sonor.es infini.<br>
+                        La trame de s.es sons est faite de 8 enregistrements de duré.es différent.es qui se superposent de façon aléatoir.es<br>
+                        Si vous souhaitez participer n'hésitez pas à nous écrire : <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                    </p>
                 </div>
 
                 <div class="home-modal-text" id="home-modal-text-2">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. itecto dolor facere ipsa ipsum modi
-                        neque perspiciatis quidem ratione, sapiente sed voluptatum.</p>
+                    <p>
+                        Là tu .es sur perpetuell.es<br>
+                        C'est une sorte de générateur de fond sonores fait à partir de 8 pistes de longueurs différentes qui se lancent plus ou moins aléatoirement.<br>
+                        Si tu as envie participer envoie nous un mail et on en parle : <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                    </p>
                 </div>
 
                 <div class="home-modal-text" id="home-modal-text-3">
-                    <p>Lorem ipsumLorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, earum placeat.
-                        Aliquid impedit nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi neque
-                        perspiciatis quidem ratione, sapiente sed voluptatum. Dolores, earum placeat. Aliquid impedit
-                        nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi neque perspiciatis quidem
-                        ratione, sapiente sed voluptatum.</p>
+                    <p>
+                        Si vous lisez ces mots c'est que vous êtes tombées sur ce site et vous vous demandez de quoi il s'agit.<br>
+                        Nous ne sommes pas en mesure de vous répondre car nous n'en avons aucune idée.<br>
+                        Par contre nous avons une adresse mail : <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                    </p>
                 </div>
 
                 <div class="home-modal-text" id="home-modal-text-4">
-                    <p>Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, earum placeat.
-                        Aliquid impedit nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi neque
-                        perspiciatis quidem ratione, sapiente sed voluptatum re ipsa ipsum modi neque perspiciatis
-                        quidem ratione, sapiente sed voluptatum.</p>
-                </div>
-
-                <div class="home-modal-text" id="home-modal-text-5">
-                    <p>Lorem ipsum dolor LorLorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, earum
-                        placeat. Aliquid impedit nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi
-                        neque perspiciatis quidem ratione, sapiente sed voluptatum Lorem ipsum dolor sit amet,
-                        consectetur adipisicing elit. Dolores, earum placeat. Aliquid impedit nam nemo odit perferendis?
-                        Architecto dolor facere ipsa ipsum modi neque perspiciatis quidem ratione, sapiente sed
-                        voluptatum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, earum placeat.
-                        Aliquid impedit nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi neque
-                        perspiciatis quidem ratione, sapiente sed voluptatum perspiciatis quidem ratione, sapiente sed
-                        voluptatum.</p>
-                </div>
-
-                <div class="home-modal-text" id="home-modal-text-6">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, earum placeat. Aliquid impedit
-                        nam nemo odit perferendis? Architecto dolor facere ipsa ipsum modi neque perspiciatis quidem
-                        ratione, sapiente sed voluptatum Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Dolores, earum placeat. Aliquid impedit nam nemo odit perferendis? Architecto dolor facere ipsa
-                        ipsum modi neque perspiciatis quidem ratione, sapiente sed voluptatum.</p>
+                    <p>
+                        8 pistes de durées différents qui se chevauchent aléatoirement.<br>
+                        1 capture vidéo qui se répète indéfiniment.<br>
+                        Aucune limitation au temps de diffusion.<br>
+                        <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                    </p>
                 </div>
             </div>
         </div>
