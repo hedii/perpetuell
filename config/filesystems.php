@@ -66,19 +66,6 @@ return [
             'use_path_style_endpoint' => true,
         ],
 
-        'cloud-public' => [
-            'driver' => 'swift',
-            'username' => env('OVH_OPENSTACK_USERNAME'),
-            'password' => env('OVH_OPENSTACK_PASSWORD'),
-            'projectId' => env('OVH_OPENSTACK_PROJECT_ID'),
-            'tenantId' => env('OVH_OPENSTACK_TENANT_ID'),
-            'tenantName' => env('OVH_OPENSTACK_TENANT_NAME'),
-            'authUrl' => env('OVH_OPENSTACK_AUTH_URL', 'https://auth.cloud.ovh.net/v3/'),
-            'region' => env('OVH_OPENSTACK_REGION', 'GRA'),
-            'containerName' => env('OVH_OPENSTACK_CONTAINER_NAME', 'perpetuell'),
-            'visibility' => 'public',
-        ],
-
     ],
 
 ];
