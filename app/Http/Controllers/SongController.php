@@ -16,7 +16,10 @@ class SongController extends Controller
     {
         $songs = Song::with(['tracks' => function ($query) {
             $query->orderBy('order');
-        }])->latest()->get();
+        }])
+            ->where('is_published', true)
+            ->latest()
+            ->get();
 
         return view('front.pages.songs.index', compact('songs'));
     }
@@ -29,6 +32,10 @@ class SongController extends Controller
      */
     public function show(Song $song): View
     {
+        if (! $song->is_published) {
+            abort(404);
+        }
+
         $song->load(['tracks' => function ($query) {
             $query->orderBy('order');
         }]);
