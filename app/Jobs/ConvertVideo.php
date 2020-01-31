@@ -63,7 +63,7 @@ class ConvertVideo implements ShouldQueue
         $this->song->update(['video' => $convertedVideoPath]);
 
         // copy converted video file from local disk to cloud disk
-        Storage::disk('s3')->writeStream(
+        Storage::writeStream(
             $convertedVideoPath,
             Storage::disk('local')->readStream($convertedVideoPath)
         );

@@ -13,7 +13,7 @@
 @includeWhen(Route::is('front.songs.index'), 'front.partials.header')
 @yield('content')
 <script>
-window.containerUrl = '{{ config('filesystems.disks.s3.url') }}'
+window.containerUrl = '{{ config('filesystems.disks.ovh-swift.publicUrl') }}'
 </script>
 <script src="{{ mix('js/front/app.js') }}"></script>
 @stack('scripts')

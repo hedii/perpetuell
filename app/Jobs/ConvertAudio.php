@@ -67,7 +67,7 @@ class ConvertAudio implements ShouldQueue
         ]);
 
         // copy converted audio file from local disk to cloud disk
-        Storage::disk('s3')->writeStream(
+        Storage::writeStream(
             $convertedAudioPath,
             Storage::disk('local')->readStream($convertedAudioPath)
         );

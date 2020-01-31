@@ -50,7 +50,7 @@ class OptimizeSongImage implements ShouldQueue
                 ->save();
 
             // copy image from local disk to cloud disk
-            Storage::disk('s3')->writeStream(
+            Storage::writeStream(
                 $this->song->image,
                 Storage::disk('local')->readStream($this->song->image)
             );

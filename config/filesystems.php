@@ -66,6 +66,19 @@ return [
             'use_path_style_endpoint' => true,
         ],
 
+        'ovh-swift' => [
+            'driver' => 'ovh-swift',
+            'authUrl' => env('OVH_SWIFT_OPENSTACK_AUTH_URL', 'https://auth.cloud.ovh.net/v3/'),
+            'region' => env('OVH_SWIFT_OPENSTACK_REGION'),
+            'projectId' => env('OVH_SWIFT_OPENSTACK_PROJECT_ID'),
+            'containerName' => env('OVH_SWIFT_CONTAINER_NAME'),
+            'prefix' => env('OVH_SWIFT_PREFIX'),
+            'username' => env('OVH_SWIFT_OPENSTACK_USERNAME'),
+            'password' => env('OVH_SWIFT_OPENSTACK_PASSWORD'),
+            'visibility' => env('OVH_SWIFT_VISIBILITY', 'public'),
+            'publicUrl' => env('OVH_SWIFT_PUBLIC_URL'),
+        ],
+
     ],
 
 ];
