@@ -54,7 +54,8 @@ class SongController extends Controller
         ];
 
         for ($i = 1; $i <= 8; $i++) {
-            $rules["track_audio_{$i}"] = 'required|file|mimetypes:audio/mpeg3,audio/x-mpeg-3,audio/mpeg';
+//            $rules["track_audio_{$i}"] = 'required|file|mimetypes:audio/mpeg3,audio/x-mpeg-3,audio/mpeg';
+            $rules["track_audio_{$i}"] = 'required|file';
             $rules["track_image_{$i}"] = 'required|image|mimes:png';
         }
 
