@@ -54,7 +54,7 @@ class SongController extends Controller
         ];
 
         for ($i = 1; $i <= 8; $i++) {
-            $rules["track_audio_{$i}"] = 'required|file|mimes:mpga';
+            $rules["track_audio_{$i}"] = 'required|file|mimetypes:audio/mpeg3,audio/x-mpeg-3,audio/mpeg';
             $rules["track_image_{$i}"] = 'required|image|mimes:png';
         }
 
@@ -106,33 +106,6 @@ class SongController extends Controller
         }]);
 
         return \view('admin.pages.songs.edit', compact('song'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Song $song
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function update(Request $request, Song $song): RedirectResponse
-    {
-        $rules = [
-            'name' => 'required|string|max:255',
-            'image' => 'required|image',
-            'video' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
-        ];
-
-        for ($i = 1; $i <= 8; $i++) {
-            $rules["track_audio_{$i}"] = 'required|file|mimes:mpga';
-            $rules["track_image_{$i}"] = 'required|image|mimes:png';
-        }
-
-        $this->validate($request, $rules);
-
-        return redirect(route('admin.songs.edit', $song))
-            ->with('status', "Song #{$song->id} ({$song->name}) updated");
     }
 
     /**

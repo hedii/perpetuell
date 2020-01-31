@@ -22,7 +22,6 @@ Route::group([
     Route::get('songs/create', 'Admin\SongController@create')->name('admin.songs.create');
     Route::post('songs', 'Admin\SongController@store')->name('admin.songs.store');
     Route::get('songs/{song}/edit', 'Admin\SongController@edit')->name('admin.songs.edit');
-    Route::put('songs/{song}', 'Admin\SongController@update')->name('admin.songs.update');
     Route::delete('songs/{song}', 'Admin\SongController@destroy')->name('admin.songs.destroy');
 });
 

@@ -38,12 +38,12 @@
                                 <td>
                                     <a class="btn btn-sm btn-outline-primary"
                                        href="{{ route('admin.songs.edit', $song) }}">
-                                        Edit
+                                        Show
                                     </a>
                                     <a class="btn btn-sm btn-outline-success"
                                        href="{{ route('front.songs.show', $song) }}"
                                        target="_blank">
-                                        Show
+                                        Show Live
                                     </a>
                                     <button type="button"
                                             class="btn btn-sm btn-outline-danger"

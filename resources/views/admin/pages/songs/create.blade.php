@@ -33,7 +33,7 @@
                             <button type="submit" class="btn btn-primary">Create</button>
                             <a class="btn btn-secondary"
                                href="{{ route('admin.songs.index') }}">
-                                Cancel
+                                Back
                             </a>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                         </div>
                         <div class="form-group">
-                            <label for="image">Choose an image (jpeg, jpg or png)</label>
+                            <label for="image">Choose a song image (jpeg, jpg or png)</label>
                             <input type="file"
                                    class="form-control-file {{ $errors->has('image') ? 'is-invalid' : '' }}"
                                    id="image"
@@ -63,7 +63,7 @@
                             <div class="invalid-feedback">{{ $errors->first('image') }}</div>
                         </div>
                         <div class="form-group">
-                            <label for="video">Choose a video (mp4)</label>
+                            <label for="video">Choose a song video (mp4)</label>
                             <input type="file"
                                    class="form-control-file {{ $errors->has('video') ? 'is-invalid' : '' }}"
                                    id="video"
@@ -80,7 +80,7 @@
                                 <div class="card-header">Track {{ $i }}</div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="track_image_{{ $i }}">Choose a wave image (png)</label>
+                                        <label for="track_image_{{ $i }}">Choose a track image (png)</label>
                                         <input type="file"
                                                class="form-control-file {{ $errors->has("track_image_{$i}") ? 'is-invalid' : '' }}"
                                                id="track_image_{{ $i }}"
