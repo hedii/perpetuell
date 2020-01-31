@@ -1,6 +1,15 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.admin', ['bodyClasses' => ['song-create']])
 
 @section('content')
+    <div id="loading" class="d-none">
+        <div>
+            <p>
+                <img src="{{ asset('images/mini-loader.gif') }}" alt="" >
+                Please wait while the files are being converted...
+            </p>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12 mb-3">
             <h3>New Song</h3>
@@ -11,7 +20,8 @@
     <form action="{{ route('admin.songs.store') }}"
           method="post"
           accept-charset="utf-8"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+          id="song-create-form">
         {{ csrf_field() }}
         <div class="row">
             <div class="order-lg-last col-lg-4 col-xl-3">

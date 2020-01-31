@@ -9,7 +9,7 @@
     <script src="{{ asset('js/admin/app.js') }}" defer></script>
     <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="{{ isset($bodyClasses) ? implode(' ', $bodyClasses) : '' }}">
 @include('admin.partials.header')
 @include('admin.partials.main')
 </body>
