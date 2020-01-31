@@ -14,12 +14,7 @@ class SongController extends Controller
      */
     public function index(): View
     {
-        $songs = Song::with(['tracks' => function ($query) {
-            $query->orderBy('order');
-        }])
-            ->where('is_published', true)
-            ->latest()
-            ->get();
+        $songs = Song::where('is_published', true)->latest()->get(['id', 'image']);
 
         return view('front.pages.songs.index', compact('songs'));
     }
