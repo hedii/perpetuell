@@ -17,6 +17,15 @@ class Song extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_published' => 'boolean',
+    ];
+
+    /**
      * The "booting" method of the model.
      */
     public static function boot()
