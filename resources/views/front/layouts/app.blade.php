@@ -10,7 +10,7 @@
     <link href="{{ mix('css/front/app.css') }}" rel="stylesheet">
 </head>
 <body>
-@includeWhen(Route::is('front.songs.index'), 'front.partials.header')
+@includeWhen(Route::is(['front.songs.index', 'front.no-mobile']), 'front.partials.header')
 @yield('content')
 <script>
 window.containerUrl = '{{ config('filesystems.disks.ovh-swift.publicUrl') }}'

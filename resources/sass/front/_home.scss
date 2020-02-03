@@ -1,9 +1,15 @@
 .site-logo {
   width: 400px;
   height: auto;
+  max-width: 100%;
 }
 
 .three-point {
   width: 120px;
+  height: auto;
+}
+
+.no-mobile-image {
+  width: 100%;
   height: auto;
 }
