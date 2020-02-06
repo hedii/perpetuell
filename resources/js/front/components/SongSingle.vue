@@ -6,9 +6,9 @@
         <p v-if="error">
           An error has occurred during tracks preload, please <a :href="homeUrl">go back to home</a>
         </p>
-        <PulseLoader v-else
-                     :loading="isLoading"
-                     color="black"/>
+        <img v-else
+             src="/images/loading.gif"
+             alt="loading">
       </div>
     </template>
     <template v-else>
@@ -39,14 +39,12 @@
 <script>
 import BackToHome from './BackToHome'
 import TrackComponent from './TrackComponent'
-import PulseLoader from 'vue-spinner/src/PulseLoader'
 import axios from 'axios'
 
 export default {
   components: {
     BackToHome,
-    TrackComponent,
-    PulseLoader
+    TrackComponent
   },
   data () {
     return {
