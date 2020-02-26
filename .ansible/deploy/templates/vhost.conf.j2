@@ -10,6 +10,75 @@ server {
 
     return 301 https://{{ app_domain_name }}$request_uri;
 }
+
+server {
+    listen 443 ssl http2;
+    server_name www.{{ app_domain_name }};
+
+    index index.html index.htm index.php;
+
+    access_log off;
+    error_log off error;
+
+    ssl_certificate /etc/letsencrypt/live/{{ app_domain_name }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ app_domain_name }}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    return 301 https://{{ app_domain_name }}$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name {{ app_domain_name }};
+
+    root {{ nginx_base_web_directory }}/perpetuell/current/public;
+
+    index index.html index.htm index.php;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+    add_header X-XSS-Protection "1; mode=block";
+
+    charset utf-8;
+    access_log off;
+
+    ssl_certificate /etc/letsencrypt/live/{{ app_domain_name }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ app_domain_name }}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:{{ php_fpm_listen }};
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 600;
+        fastcgi_send_timeout 600;
+        fastcgi_read_timeout 600;
+    }
+
+    location ~* \.(woff|woff2|eot|ttf|jpg|jpeg|gif|svg|css|png|js|ico|json)$ {
+        access_log off;
+        log_not_found off;
+        expires max;
+        gzip_vary on;
+    }
+
+    location ~ /\.(?!well-known).* {
+        access_log off;
+        log_not_found off;
+        deny all;
+    }
+}
 {% else %}
 server {
     listen 80;
@@ -24,25 +93,25 @@ server {
 }
 
 server {
-     listen 80;
-     server_name {{ app_domain_name }};
+    listen 80;
+    server_name {{ app_domain_name }};
 
-     root {{ nginx_base_web_directory }}/perpetuell/current/public;
+    root {{ nginx_base_web_directory }}/perpetuell/current/public;
 
-     index index.html index.htm index.php;
+    index index.html index.htm index.php;
 
-     add_header X-Frame-Options "SAMEORIGIN";
-     add_header X-Content-Type-Options "nosniff";
-     add_header X-XSS-Protection "1; mode=block";
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+    add_header X-XSS-Protection "1; mode=block";
 
-     charset utf-8;
-     access_log off;
+    charset utf-8;
+    access_log off;
 
-     location / {
+    location / {
         try_files $uri $uri/ /index.php?$query_string;
-     }
+    }
 
-     location ~ \.php$ {
+    location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:{{ php_fpm_listen }};
         fastcgi_index index.php;
@@ -54,19 +123,19 @@ server {
         fastcgi_connect_timeout 600;
         fastcgi_send_timeout 600;
         fastcgi_read_timeout 600;
-     }
+    }
 
-     location ~* \.(woff|woff2|eot|ttf|jpg|jpeg|gif|svg|css|png|js|ico|json)$ {
+    location ~* \.(woff|woff2|eot|ttf|jpg|jpeg|gif|svg|css|png|js|ico|json)$ {
         access_log off;
         log_not_found off;
         expires max;
         gzip_vary on;
-     }
+    }
 
-     location ~ /\.(?!well-known).* {
+    location ~ /\.(?!well-known).* {
         access_log off;
         log_not_found off;
         deny all;
-     }
+    }
 }
 {% endif %}

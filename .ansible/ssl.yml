@@ -1,0 +1,23 @@
+---
+- name: Ensure ssl certificates are installed
+  hosts: all
+  become: yes
+  vars_files:
+    - vars/app.yml
+    - vars/certbot.yml
+  tasks:
+    - name: Install apt packages
+      apt:
+        name:
+          - certbot
+          - python-certbot-nginx
+          - python3-certbot-dns-ovh
+        state: present
+    - name: Copy ovh credentials to remote
+      template:
+        src: ovh.ini.j2
+        dest: /home/debian/ovh.ini
+        mode: 0600
+    - name: Run certbot
+      command: certbot certonly --dns-ovh --dns-ovh-credentials /home/debian/ovh.ini --non-interactive --agree-tos --email {{ certbot_email }} -i nginx -d {{ app_domain_name }} -d *.{{ app_domain_name }}
+
