@@ -13,7 +13,7 @@ return [
     | requests. By default, we will use the lightweight native driver but
     | you may specify any of the other wonderful drivers provided here.
     |
-    | Supported: "file", "cookie", "database", "apc",
+    | Supported: "file", "cookie",secure "database", "apc",
     |            "memcached", "redis", "dynamodb", "array"
     |
     */
@@ -166,7 +166,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE', false),
+    'secure' => env('SESSION_SECURE_COOKIE', null),
 
     /*
     |--------------------------------------------------------------------------
