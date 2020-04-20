@@ -1,5 +1,6 @@
 <template>
-  <div class="track"
+  <div @click="restart"
+       class="track"
        :style="trackStyle">
     <img :src="imageUrl"
          :alt="trackAlt"
@@ -56,11 +57,17 @@ export default {
   methods: {
     incrementLoopDelay () {
       this.loopDelay = this.loopDelay + 1
+    },
+    restart () {
+      this.isPlaying = false
+      this.howl.stop(this.howlId)
+      setTimeout(() => {
+        this.howl.play(this.howlId)
+      }, 1000)
     }
   },
   mounted () {
     this.howl = new Howl({ src: `${this.baseUrl}/${this.track.audio}` })
-
 
     this.howlId = this.howl.play()
 
@@ -93,6 +100,10 @@ export default {
 <style scoped>
   .track {
     transition: opacity 1s;
+  }
+
+  .track:hover {
+    cursor: pointer;
   }
 
   .track img {
