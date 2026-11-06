@@ -26,5 +26,5 @@ Route::group([
 });
 
 Route::get('no-mobile', 'NoMobileController')->name('front.no-mobile');
-Route::get('/', 'SongController@index')->middleware('no-mobile')->name('front.songs.index');
-Route::get('{song}', 'SongController@show')->middleware('no-mobile')->name('front.songs.show');
+Route::get('/', 'SongController@index')->name('front.songs.index');
+Route::get('{song}', 'SongController@show')->name('front.songs.show');
