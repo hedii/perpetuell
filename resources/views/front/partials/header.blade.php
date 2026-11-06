@@ -63,7 +63,7 @@
 
                     <div class="home-modal-text" id="home-modal-text-4">
                         <p>
-                            contact: <a href="mailto:contact@perpetuell.es">ltseeney@gmail.com</a>
+                            contact: <a href="mailto:ltseeney@gmail.com">ltseeney@gmail.com</a>
                         </p>
                     </div>
                 </div>
