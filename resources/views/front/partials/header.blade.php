@@ -45,34 +45,25 @@
                 <div class="modal-body">
                     <div class="home-modal-text" id="home-modal-text-1">
                         <p>
-                            perpetuell.es est un site hébergeant des paysag.es sonor.es infini.<br>
-                            La trame de s.es sons est faite de 8 enregistrements de duré.es différent.es qui se superposent de façon aléatoir.es<br>
-                            Si vous souhaitez participer n'hésitez pas à nous écrire : <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                            ni queues ni têtes, ni dieux ni maîtres, ni début ni fin
                         </p>
                     </div>
 
                     <div class="home-modal-text" id="home-modal-text-2">
                         <p>
-                            Là tu .es sur perpetuell.es<br>
-                            C'est une sorte de générateur de fond sonores fait à partir de 8 pistes de longueurs différentes qui se lancent plus ou moins aléatoirement.<br>
-                            Si tu as envie participer envoie nous un mail et on en parle : <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                            Nơi nào có sự quan tâm, nơi đó sự chân thành im lặng
                         </p>
                     </div>
 
                     <div class="home-modal-text" id="home-modal-text-3">
                         <p>
-                            Si vous lisez ces mots c'est que vous êtes tombées sur ce site et vous vous demandez de quoi il s'agit.<br>
-                            Nous ne sommes pas en mesure de vous répondre car nous n'en avons aucune idée.<br>
-                            Par contre nous avons une adresse mail : <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                            the end is the beginning and the beginning is the end
                         </p>
                     </div>
 
                     <div class="home-modal-text" id="home-modal-text-4">
                         <p>
-                            8 pistes de durées différents qui se chevauchent aléatoirement.<br>
-                            1 capture vidéo qui se répète indéfiniment.<br>
-                            Aucune limitation au temps de diffusion.<br>
-                            <a href="mailto:contact@perpetuell.es">contact@perpetuell.es</a>
+                            contact: <a href="mailto:contact@perpetuell.es">ltseeney@gmail.com</a>
                         </p>
                     </div>
                 </div>
